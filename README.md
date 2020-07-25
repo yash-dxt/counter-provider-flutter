@@ -1,6 +1,8 @@
 # counterprovider
 
 A new Flutter application.
+It is the most basic counter app, that is modified, and uses the provider package!
+
 
 ## Getting Started
 

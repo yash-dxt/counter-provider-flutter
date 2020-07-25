@@ -1,4 +1,5 @@
 import 'package:counterprovider/counter_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,8 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => CounterData(),
+      create: (_) {
+        CounterData counterData = CounterData();
+        counterData.getSharedPrefsData();
+
+        return counterData;
+      },
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo with Provider',
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -41,9 +48,11 @@ class MyHomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'You have pushed the button this many times:',
+                  'counter:',
                 ),
+                counterData.counter == null? Center(child: CircularProgressIndicator(),):
                 Text(
+
                   '${counterData.counter}',
                   style: Theme.of(context).textTheme.headline4,
                 ),
